@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: #05080f;
+  color: #f3f5f9;
+  font-family: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #23395d;
+  color: #f3f5f9;
+}
+
+/* Blue-tinted, unobtrusive scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #05080f;
+}
+::-webkit-scrollbar-thumb {
+  background: #1c2e4a;
+  border-radius: 999px;
+  border: 2px solid #05080f;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #23395d;
+}
+
+/* Accessible focus ring in the deep-blue family */
+:where(a, button, input, [tabindex]):focus-visible {
+  outline: 2px solid #8aa6d4;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ─────────────────────────────────────────────────────────
+   Liquid glass — the signature surface (per brand spec).
+   Used intentionally for chrome/controls floating over the
+   cinematic video, NOT as a blanket treatment on every card.
+   ───────────────────────────────────────────────────────── */
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.01);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: none;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.45) 0%,
+    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(255, 255, 255, 0.15) 80%,
+    rgba(255, 255, 255, 0.45) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Slightly stronger blur variant for the sticky nav so text stays legible */
+.liquid-glass--nav {
+  background: rgba(10, 16, 30, 0.28);
+  background-blend-mode: normal;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+/* Deep-blue tinted glass for panels that sit on solid sections */
+.liquid-glass--deep {
+  background: rgba(28, 46, 74, 0.32);
+  background-blend-mode: normal;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Grain/vignette helpers for the cinematic frame */
+.cinematic-vignette {
+  background:
+    radial-gradient(120% 80% at 50% 8%, rgba(5, 8, 15, 0) 40%, rgba(5, 8, 15, 0.55) 100%),
+    linear-gradient(180deg, rgba(5, 8, 15, 0.55) 0%, rgba(5, 8, 15, 0.1) 22%, rgba(5, 8, 15, 0.25) 62%, rgba(5, 8, 15, 0.92) 100%);
+}
+
+.hairline {
+  border: 1px solid rgba(138, 166, 212, 0.14);
+}
+
+/* Respect reduced-motion: kill non-essential animation + smooth scroll */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

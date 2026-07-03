@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jaypee-caldamo-portfolio.vercel.app/sitemap.xml

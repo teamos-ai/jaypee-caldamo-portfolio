@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Check, Copy, Mail, Phone, MapPin, Clock, CalendarClock } from "lucide-react";
 import { Reveal, Eyebrow } from "./Reveal";
 import { SITE } from "../config";
@@ -41,6 +41,20 @@ function EmailCopy() {
 
 export function Booking() {
   const hasEmbed = SITE.bookingEmbedUrl.trim().length > 0;
+  const isGhl = SITE.bookingEmbedUrl.includes("link.teamos.ai");
+
+  // Load GHL's form_embed.js once so the calendar iframe auto-resizes to its
+  // own content height (no inner scrollbars).
+  useEffect(() => {
+    if (!hasEmbed || !isGhl) return;
+    const src = SITE.bookingEmbedScript;
+    if (document.querySelector(`script[src="${src}"]`)) return;
+    const script = document.createElement("script");
+    script.src = src;
+    script.type = "text/javascript";
+    script.async = true;
+    document.body.appendChild(script);
+  }, [hasEmbed, isGhl]);
 
   return (
     <section id="book" className="relative mx-auto max-w-6xl px-6 py-24 sm:py-32">
@@ -100,12 +114,15 @@ export function Booking() {
         {/* Scheduler embed / fallback */}
         <Reveal>
           {hasEmbed ? (
-            <div className="h-full overflow-hidden rounded-3xl hairline bg-ink-900">
+            <div className="overflow-hidden rounded-3xl bg-white p-1.5 ring-1 ring-steel-400/15">
               <iframe
                 src={SITE.bookingEmbedUrl}
                 title="Book a call with Jaypee Caldamo"
-                className="h-[640px] w-full"
+                id={SITE.bookingEmbedId}
+                scrolling="no"
                 loading="lazy"
+                className="w-full rounded-[1.35rem]"
+                style={{ width: "100%", minHeight: 720, border: "none", overflow: "hidden" }}
               />
             </div>
           ) : (

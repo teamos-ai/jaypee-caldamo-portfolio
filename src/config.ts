@@ -15,13 +15,18 @@ export const SITE = {
   domain: "https://jaypee-caldamo-portfolio.vercel.app",
 
   /**
-   * Inline booking embed.
-   * Paste a Calendly / GoHighLevel / Google Appointment / Cal.com embed URL here.
+   * Inline booking embed (GoHighLevel / Team OS calendar widget).
    * While this stays empty, the Book-a-Call section shows a polished fallback
    * (email + phone) instead of a broken iframe.
-   * Example (Calendly): "https://calendly.com/jaypeecaldamo/discovery-call"
+   * GHL widgets auto-resize via form_embed.js (loaded by the Booking component).
    */
-  bookingEmbedUrl: "",
+  bookingEmbedUrl: "https://link.teamos.ai/widget/booking/JRFrBfUv9kJwUPzABtAO",
+
+  /** DOM id GHL assigns the booking iframe (used by form_embed.js for resizing). */
+  bookingEmbedId: "JRFrBfUv9kJwUPzABtAO_1783045325047",
+
+  /** GHL resize helper script — only injected for link.teamos.ai embeds. */
+  bookingEmbedScript: "https://link.teamos.ai/js/form_embed.js",
 
   socials: {
     // Replace "#" with the real profile URLs when available.

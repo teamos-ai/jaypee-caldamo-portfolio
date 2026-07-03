@@ -32,7 +32,7 @@ One file controls the per-deployment values:
 
 | Field | What it does |
 | --- | --- |
-| `bookingEmbedUrl` | **Paste your Calendly / GoHighLevel / Cal.com / Google booking embed URL here.** While empty, the Book-a-Call section shows a polished email fallback instead of a broken iframe. |
+| `bookingEmbedUrl` | Inline booking calendar. **Connected** to the Team OS GoHighLevel widget (`link.teamos.ai/widget/booking/JRFrBfUv9kJwUPzABtAO`). The Booking component auto-loads GHL's `form_embed.js` so the iframe resizes to the calendar's height. Clear this value to fall back to the email panel. |
 | `socials.linkedin` | Replace `#` with Jaypee's real LinkedIn URL. |
 | `email`, `phone`, `location` | Contact details (already filled from the résumé). |
 | `domain` | Your final domain — used in a couple of places. |
